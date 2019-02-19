@@ -3,10 +3,13 @@ var app=express();
 var db = require('./db/connection.js');
 var connection = db.getPool();
 
-app.listen(8082);
+//app.listen(8082);
+app.listen(3000, function() {
+  console.log('Your node is running on port 3000 !!!')
+});
 
 app.get('/index', function (req, res) {
-    res.sendFile( __dirname + "/" + "index.htm" );
+    res.sendFile( __dirname + "/" + "views/index.htm" );
  })
  
  app.get('/process_get', function (req, res) {
@@ -32,4 +35,17 @@ console.log("4");
             
         });
     });
+
+
+app.get('/records', function(req,res){
+    connection.query('select * from users', function(err,result){
+        if(result){
+            console.log('result is:',result.rows);
+            res.send(result.rows);
+        }else{
+            console.log('error is:',err);
+            res.send(err);
+        }
+    })
+});
 

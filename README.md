@@ -19,3 +19,6 @@ Database
     - Create a table
    
 
+command to run project
+        type "node app.js" in terminal.
+
